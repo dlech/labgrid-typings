@@ -14,11 +14,13 @@ from .target import Target
 class Environment:
     """An environment encapsulates targets."""
 
-    targets: dict[str, Target]
-    config: Config
+    targets: dict[str, Target] = attr.ib(init=False)
+    config: Config = attr.ib(init=False)
 
-    config_file: str = ...
-    interact: Callable[[str], str] = ...
+    config_file: str = attr.ib(
+        default="config.yaml", validator=attr.validators.instance_of(str)
+    )
+    interact: Callable[[object], str] = attr.ib(default=input, repr=False)
 
     def __attrs_post_init__(self) -> None: ...
     def get_target(self, role: str = ...) -> Optional[Target]:

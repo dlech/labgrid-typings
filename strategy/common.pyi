@@ -11,7 +11,7 @@ from ..driver import Driver
 
 @attr.s(eq=False)
 class StrategyError(Exception):
-    msg: str = ...
+    msg: str = attr.ib(validator=attr.validators.instance_of(str))
 
 @attr.s(eq=False)
 class Strategy(Driver):

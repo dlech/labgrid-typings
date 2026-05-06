@@ -24,12 +24,12 @@ class Resource(BindingMixin):
     """
 
     avail = ...
-    def __attrs_post_init__(self):  # -> None:
+    def __attrs_post_init__(self) -> None:
         ...
     @property
-    def command_prefix(self):  # -> list[Any]:
+    def command_prefix(self) -> list[str]:
         ...
-    def wrap_command(self, command):
+    def wrap_command(self, command: list[str]) -> list[str]:
         """
         Returns the command as-is, no need for command wrapping for local resources.
 
@@ -74,9 +74,9 @@ class NetworkResource(Resource):
 
     host = ...
     @property
-    def command_prefix(self):  # -> list[str]:
+    def command_prefix(self) -> list[str]:
         ...
-    def wrap_command(self, command):  # -> list[str]:
+    def wrap_command(self, command: list[str]) -> list[str]:
         """
         Returns shell-escaped command with prepended command_prefix.
 

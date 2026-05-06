@@ -8,16 +8,19 @@ import attr
 
 @attr.s(eq=False)
 class NoConfigFoundError(Exception):
-    msg: str = ...
+    msg: str = attr.ib(validator=attr.validators.instance_of(str))
 
 @attr.s(eq=False)
 class NoSupplierFoundError(Exception):
-    msg: str = ...
-    filter: set[str] | None = ...
+    msg: str = attr.ib(validator=attr.validators.instance_of(str))
+    filter: set[str] | None = attr.ib(
+        default=None,
+        validator=attr.validators.optional(attr.validators.instance_of(set))
+    )
 
 @attr.s(eq=False)
 class InvalidConfigError(Exception):
-    msg: str = ...
+    msg: str = attr.ib(validator=attr.validators.instance_of(str))
 
 @attr.s(eq=False)
 class NoDriverFoundError(NoSupplierFoundError): ...
@@ -31,4 +34,4 @@ class NoStrategyFoundError(NoSupplierFoundError): ...
 
 @attr.s(eq=False)
 class RegistrationError(Exception):
-    msg: str = ...
+    msg: str = attr.ib(validator=attr.validators.instance_of(str))
